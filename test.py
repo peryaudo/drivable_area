@@ -26,6 +26,8 @@ if True:
     targets = targets.cpu()
     for image, pred, target in zip(images, preds, targets):
         fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(20, 10))
+        for t, m, s in zip(image, [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]):
+            t.mul_(s).add_(m)
         ax[0].imshow(image.numpy().transpose(1, 2, 0))
         ax[1].imshow(pred.numpy(), cmap='gray')
         ax[2].imshow(target.numpy(), cmap='gray')
